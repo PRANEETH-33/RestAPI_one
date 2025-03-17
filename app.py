@@ -1,4 +1,6 @@
 from flask import Flask, jsonify
+import json
+import requests
 
 
 todo = Flask('__name__')
@@ -32,6 +34,16 @@ def students_list():
 
 
 
+@todo.route('/Restapi')
+def Restapi():
+    url = "http://127.0.0.1:5005//students_list"
+
+    response = requests.request("GET", url)
+    return response.json()
+
+
+
+
 @todo.route('/student/get/<int:id>')
 def student_get_by_id(id):
     for std in students:
@@ -39,11 +51,6 @@ def student_get_by_id(id):
 
             return jsonify(std)
     return "id not found"
-
-
-
-
-
 
 
 
